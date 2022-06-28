@@ -1,35 +1,9 @@
-"""
-import os
-
-def findfile(name, path):
-    for dirpath, dirname, filename in os.walk(path):
-        if name in filename:
-            return os.path.join(dirpath, name)
-
-filepath = findfile("001_negative_ratings.txt", "C:/Users/vanos/Desktop/SURCResearch")
-print(filepath)
-#Above code only works for specific file path names, not keywords
-
-#filepath = findfile("001_", "C:/Users/vanos/Desktop/SURCResearch") 
-#See, code does not work for 
-
-"""
-
-#1-> Make sure image ratings are consistently named for patients 001 - 999 (ie for rate.html, type "001" as the patient number for Patient #1) //DONE
-#2-> Do positive image ratings, put in Image Ratings folder of Assets Folder, name file (ie "001_positive_ratings.txt") //DONE
-#3-> Do negative image ratings, put in Image Ratings folder of Assets Folder, name file (ie "001_negative_ratings.txt") //DONE
-#4-> Create a function that loops through patient files 001-999 to find the correspinding negative image ratings and positive image ratings in Assets folder for each individual patient number
-#5-> Create an (empty) file  and place in Participants Folder, name file (ie "001_images.txt") during loop through patient numbers, incorporate break in loop for already completed patient numbers
-#6-> Combine the positive and negative images for a single patient number (without ratings) and write that information to the empty file in Participants Folder (ie "001_images.txt") //DONE
-
-
-###############################################    Step 4 Attempt Below    ###########################################################################################
-
-
-#function to find specific file paths of a specific file name within a directory
+#REQUIRED!!
+#Read the README.md file prior to starting rate.html or replacing file directory paths in this code.
 
 import os
 
+#Function that searches for files with specific names in a given folder
 def findfile(name, path):
     for dirpath, dirname, filename in os.walk(path):
         if name in filename:
@@ -37,8 +11,9 @@ def findfile(name, path):
         else:
             continue
 
+
+
 #Function to remove some unneeded symbols from {}_positive_ratings.txt and {}_negative_ratings.txt. Will be used later once {}_positive_ratings.txt and {}_negative_ratings.txt are found through loop.
-#Code taken from trialscript.py
 
 replacables = ["{", "}", '"ratings":']
 def replaceSymbols(old_string):
@@ -47,7 +22,7 @@ def replaceSymbols(old_string):
         old_string = new_string
         
     for num in range(100,0,-1):
-        new_string = old_string.replace('.jpg":{}'.format(num), '.jpg"') #.replace('.jpg"00', '.jpg"')
+        new_string = old_string.replace('.jpg":{}'.format(num), '.jpg"') 
         old_string = new_string
 
     return old_string
@@ -60,15 +35,15 @@ for ParticipantNumber in range(0, 999, 1):
      ParticipantNumber = str(ParticipantNumber).rjust(3, '0')
      filename_positive = "{}_positive_ratings.txt".format(ParticipantNumber)
      filename_negative = "{}_negative_ratings.txt".format(ParticipantNumber)
-     if (findfile(filename_positive, "C:/Users/vanos/Desktop/SURCResearch/Personalised-CBM_4.18.22/Assets/Image Ratings")):
-        filepath_positive = findfile(filename_positive, "C:/Users/vanos/Desktop/SURCResearch/Personalised-CBM_4.18.22/Assets/Image Ratings")
-        #print(filepath_positive)
+     if (findfile(filename_positive, "")): ###Image Ratings Folder File Path###
+        filepath_positive = findfile(filename_positive, "") ###Image Ratings Folder File Path###
+        
      else:
         continue
 
-     if (findfile(filename_negative, "C:/Users/vanos/Desktop/SURCResearch/Personalised-CBM_4.18.22/Assets/Image Ratings")):
-        filepath_negative = findfile(filename_negative, "C:/Users/vanos/Desktop/SURCResearch/Personalised-CBM_4.18.22/Assets/Image Ratings")
-        #print(filepath_negative)
+     if (findfile(filename_negative, "")):  ###Image Ratings Folder File Path###
+        filepath_negative = findfile(filename_negative, "")  ###Image Ratings Folder File Path###
+        
      else:
         continue
 
@@ -77,13 +52,12 @@ for ParticipantNumber in range(0, 999, 1):
     #if it does exist, skip that number iteration and continue the loop
 
      if ((ParticipantNumber in filepath_positive) and (ParticipantNumber in filepath_negative)):
-        if (findfile("{}_images.txt".format(ParticipantNumber), "C:/Users/vanos/Desktop/SURCResearch/Personalised-CBM_4.18.22/Participants")):
+        if (findfile("{}_images.txt".format(ParticipantNumber), "")): ###Participants Folder File Path###
             continue
         else:
             #create a new {}_images.txt file in the Participants Folder
-            new_images_file = open("C:/Users/vanos/Desktop/SURCResearch/Personalised-CBM_4.18.22/Participants/{}_images.txt".format(ParticipantNumber), "w")
+            new_images_file = open(" /{}_images.txt".format(ParticipantNumber), "w") ###Participants Folder File Path IN FRONT OF /{}_images.txt###
 
-            #Use trialscript.py function
             with open (filepath_positive, "r") as p:
                 old_pos = p.read()
             new_pos = replaceSymbols(old_pos)
@@ -101,39 +75,3 @@ for ParticipantNumber in range(0, 999, 1):
         continue
 
 
-
-
-
-
-
-
-
-
-
-
-        
-
-        
-     
-     
-     
-
-
-
-
-
-
-
-
-
-"""
-
-Testing rjust() for leading zero placement https://www.delftstack.com/howto/python/python-leading-zeros/
-
-a = [1, 10]
-for num in a:
-    print (str(num).rjust(2, '0'))
-
-Leading number of leading zeros changes based on the amount of number places a number has (Which means less work!)
-
-"""
