@@ -1,7 +1,9 @@
 # CognitiveBiasJoystickProgram
+
+
 This contains the python script "filefinder.py". "filefinder.py" will be used for the Cognitive Bias Project. To use "filefinder.py", rate.html must be completed. The files generated from this script can be used for abm.html and aat.html
 READ THIS ENTIRE PAGE BEFORE RUNNING filefinder.py TO AVOID ISSUES!
-
+THIS PAGE IS FORMATTED INCORRECTLY ON GITHUB. ON THE COGNITIVEBIASJOYSTICKPROGRAM GITHUB PAGE, CLICK THE LINK TO THE README.MD FILE AND THEN CLICK RAW TO VIEW THIS FILE IN A PROPERLY FORMATTED METHOD
 
 1. Naming of Positive and Negative Rating Files Downloaded after Completion of rate.html 
 
